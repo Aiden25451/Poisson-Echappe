@@ -1,0 +1,78 @@
+#gameScreen {
+    border: 1px solid black;
+    visibility: hidden;
+    
+}
+
+#main {
+    z-index: -1;
+    position: absolute
+}
+
+#name {
+    background-color: rgb(0, 88, 170);
+    color:aliceblue;
+    border: 5px solid rgb(0, 12, 34);
+
+    font-size: 3.5rem;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    min-width:25rem;
+}
+
+#name:hover {
+    background-color: #000278; 
+    color: rgb(149, 239, 255);
+    border: 5px solid rgb(149, 239, 255);
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text)
+}
+
+body{
+    margin-top: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    color:aliceblue;
+    background-color: rgb(0, 183, 255);
+}
+ 
+.title{
+    justify-content: center;
+    align-items: center;
+}
+
+.title h1{
+    font-size: 5rem;
+}
+
+.title h2{
+    font-size: 4rem;
+}
+
+.buttons {
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    background-color: rgb(0, 88, 170);
+    color:aliceblue;
+    border: 5px solid rgb(0, 12, 34);
+
+    font-size: 3.5rem;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    width:25rem;
+}
+
+button:hover {
+    background-color: #000278; 
+    color: rgb(149, 239, 255);
+    border: 5px solid rgb(149, 239, 255);
+}
