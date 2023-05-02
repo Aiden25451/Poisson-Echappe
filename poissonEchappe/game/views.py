@@ -15,19 +15,19 @@ def game(request):
             
             time = round(float(time))
 
-            for score in Score.objects.all():
-                if(name == score.name):
-                    repeat = True
+            # for score in Score.objects.all():
+            #     if(name == score.name):
+            #         repeat = True
 
-            if(repeat):
-                context["name"] = name
-                context["time"] = time
-            else:
-                score = Score()
-                score.name = name
-                score.time = time
-                score.save()
-                return redirect('../../home')
+            # if(repeat):
+            #     context["name"] = name
+            #     context["time"] = time
+            # else:
+            score = Score()
+            score.name = name
+            score.time = time
+            score.save()
+            return redirect('../../home')
             
         except Exception as e:
             print(f"The error is {e}")
