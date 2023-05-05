@@ -5,7 +5,7 @@ class Player {
         this.height = 50;
         this.speedX = 0;
         this.velY = 0;
-        this.maxVelY = 30;
+        this.maxVelY = 0.5;
         this.velX = 0;
         this.state = state;
         this.input = input;
@@ -17,7 +17,7 @@ class Player {
         this.color = "#0ff"
 
         this.cooldown = 0;
-        this.cooldown_reset = 500;
+        this.cooldown_reset = 100;
 
         this.maxSpeedY = 70;
 
@@ -35,7 +35,7 @@ class Player {
 
     jump() {
         if(this.cooldown <= 0) {
-            this.velX += 20;
+            this.velX += 0.5;
             this.cooldown = this.cooldown_reset
         } 
     }
@@ -63,7 +63,7 @@ class Player {
         // if(this.velY > this.maxVelY) this.velY = this.maxVelY;
         // else if(this.velY < -this.maxVelY) this.velY = -this.maxVelY;
 
-        this.position.y += this.velY / deltaTime;
+        this.position.y += this.velY * deltaTime;
 
         if(this.position.y < 0)
             this.position.y = 0;
@@ -71,12 +71,12 @@ class Player {
             this.position.y = GAME_HEIGHT - this.height;
 
         // this.position.x += this.velX / deltaTime;
-        this.camera.camx += this.velX / deltaTime;
+        this.camera.camx += (this.velX * deltaTime);
         // console.log("velx: " + this.velX + " time: " + deltaTime + " CamxChange: " + this.velX / deltaTime)
 
         if(this.cooldown >= 0) this.cooldown -= (deltaTime);
 
-        if(this.velX > 0) this.velX -= 0.05;
+        if(this.velX > 0) this.velX -= 0.0005 * deltaTime;
         else if(this.velX < 0) this.velX = 0;
     }
 

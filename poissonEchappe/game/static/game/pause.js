@@ -17,6 +17,9 @@ class Pause {
                     break;
             }
         })
+        document.getElementById("right").addEventListener("mousedown", () => {
+            state.state = "game";
+        })
     }
   
     // Question code

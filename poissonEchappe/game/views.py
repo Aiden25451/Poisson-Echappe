@@ -8,7 +8,7 @@ def game(request):
     context = {"name": "", "time": "DNF"}
     if request.method == "POST":
         try:
-            repeat = False
+            # repeat = False
 
             time = request.POST["best_time"]
             name = request.POST["name"]
