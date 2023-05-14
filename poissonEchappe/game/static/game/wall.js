@@ -1,26 +1,24 @@
 class Wall {
  
-    constructor(x, y, camera) {
+    constructor(x, y, width, height, camera) {
         this.camera = camera;
         this.original_x = x;
 
-        this.width = 100;
-        this.height = 100;
+        this.width = width;
+        this.height = height;
 
-        this.position = {
-            x: this.original_x - this.camera.camx,
-            y: y,
-        }
+        this.x = this.original_x - this.camera.camx;
+        this.y = y;
     }
 
     draw(ctx) {
         ctx.fillStyle = "#ff0"
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
     update(deltaTime) {
         if(!deltaTime) return;
 
-        this.position.x = this.original_x - this.camera.camx;
+        this.x = this.original_x - this.camera.camx;
     }
 }

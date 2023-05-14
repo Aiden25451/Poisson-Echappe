@@ -6,29 +6,41 @@ class Game {
         this.camera;
         this.state = state;
         this.length = 0;
+        this.input = null;
     }
 
     start() {
-        let input = new InputHandler();
+        this.input = new InputHandler();
         this.camera = new Camera();
-        this.objects.push(new Player(GAME_WIDTH, GAME_HEIGHT, this.camera, this.state, input));
+        this.objects.push(new Player(GAME_WIDTH/2, GAME_HEIGHT/2, GAME_WIDTH/28, GAME_WIDTH/28, this.camera, this.state, this.GAME_WIDTH, this.GAME_HEIGHT));
 
-        let walls = [[1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                     [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+        let walls = [[1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+                     [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
                      [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
-                     [0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1],
-                     [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1],
-                     [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1]]
+                     [0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0],
+                     [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1],
+                     [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1]]
+
+        // let walls = [[1, 1],
+        //              [1, 0],
+        //              [0, 0],
+        //              [0, 1],
+        //              [1, 1],
+        //              [1, 1]]
 
         for(let row = 0; row < walls.length; row++) {
             for(let col = 0; col < walls[0].length; col++) {
-                if(walls[row][col] == 1) this.objects.push(new Wall(1500 + col * 400, (row * 100), this.camera));
+                if(walls[row][col] == 1) this.objects.push(new Wall(this.GAME_WIDTH/1.5 + col * this.GAME_WIDTH/4, (row * this.GAME_HEIGHT/6), this.GAME_WIDTH/14, this.GAME_HEIGHT/5.9, this.camera));
             }
         }
-        this.length = walls[0].length * (400+100) + 1500;
+        this.length = walls[0].length * (this.GAME_WIDTH/4) + this.GAME_WIDTH/1.5;
             
         
         this.objects[0].jump();
+    }
+
+    stop() {
+        this.input.stop();
     }
 
     update(deltatime) {
@@ -40,7 +52,7 @@ class Game {
             }
 
             else {
-                if(this.objects[i].position.x + this.objects[i].width < 0) {
+                if(this.objects[i].x + this.objects[i].width < 0) {
                     this.objects.splice(i, 1)
                     i-=1;
                 } else {
@@ -53,7 +65,7 @@ class Game {
 
     render(ctx, time) {
         for(let i = 0; i < this.objects.length; i++) {
-            if(this.objects[i].position.x < this.GAME_WIDTH) {
+            if(this.objects[i].x < this.GAME_WIDTH) {
                 this.objects[i].draw(ctx)
             }
                 

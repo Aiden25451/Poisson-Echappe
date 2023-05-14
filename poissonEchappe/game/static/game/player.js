@@ -1,41 +1,40 @@
 class Player {
  
-    constructor(gameWidth, gameHeight, camera, state, input) {
-        this.width = 50;
-        this.height = 50;
-        this.speedX = 0;
+    constructor(x, y, width, height, camera, state, gameWidth, gameHeight) {
+        this.width = width;
+        this.height = height;
+    
+
         this.velY = 0;
-        this.maxVelY = 0.5;
+        this.maxVelY = gameHeight/932;
         this.velX = 0;
+        this.jumpX = gameWidth/2800;
+        this.slowDownX = gameWidth/2800000;
+
         this.state = state;
-        this.input = input;
-
+        this.gameHeight = gameHeight;
         this.gameWidth = gameWidth;
-
         this.camera = camera;
 
         this.color = "#0ff"
 
         this.cooldown = 0;
-        this.cooldown_reset = 100;
+        this.cooldown_reset = 500;
 
-        this.maxSpeedY = 70;
-
-        this.position = {
-            x: gameWidth/2,
-            y: gameHeight/2,
-        }
+        this.x = x;
+        this.y = y;
     }
 
+    // Draw
     draw(ctx) {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        this.color = "#0ff"
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
+    // Jump
     jump() {
         if(this.cooldown <= 0) {
-            this.velX += 0.5;
+            this.velX += this.jumpX;
             this.cooldown = this.cooldown_reset
         } 
     }
@@ -43,46 +42,43 @@ class Player {
     update(deltaTime, objects) {
         if(!deltaTime) return;
 
+        // Check for Collision
         for(let i = 0; i < objects.length; i++) {
             if(!(objects[i] instanceof Wall))continue;
 
-            if(objects[i].position.x > 0 && objects[i].position.x < this.gameWidth) {
+            if(objects[i].x > 0 && objects[i].x < this.gameWidth) {
                 if(this.checkCollision(objects[i])) {
                     this.state.state = "death";
                 }
             }
         }
 
-        if(this.input.buttons[2]) this.jump();
+        // Call jump or change velocity
+        if(window.buttons[2]) this.jump();
+        if(window.buttons[0]) this.velY = -this.maxVelY;
+        if(window.buttons[1]) this.velY = this.maxVelY;
+        if(!window.buttons[0] && !window.buttons[1]) this.velY = 0;
 
-        if(this.input.buttons[0]) this.velY = -this.maxVelY;
-        if(this.input.buttons[1]) this.velY = this.maxVelY;
-        
-        if(!this.input.buttons[0] && !this.input.buttons[1]) this.velY = 0;
+        // Change y and clamp edge of screen
+        this.y += this.velY * deltaTime;
+        if(this.y < 0)
+            this.y = 0;
+        else if(this.y + this.height > GAME_HEIGHT)
+            this.y = GAME_HEIGHT - this.height;
 
-        // if(this.velY > this.maxVelY) this.velY = this.maxVelY;
-        // else if(this.velY < -this.maxVelY) this.velY = -this.maxVelY;
-
-        this.position.y += this.velY * deltaTime;
-
-        if(this.position.y < 0)
-            this.position.y = 0;
-        else if(this.position.y + this.height > GAME_HEIGHT)
-            this.position.y = GAME_HEIGHT - this.height;
-
-        // this.position.x += this.velX / deltaTime;
+        // Change x, slow down continously
         this.camera.camx += (this.velX * deltaTime);
-        // console.log("velx: " + this.velX + " time: " + deltaTime + " CamxChange: " + this.velX / deltaTime)
-
-        if(this.cooldown >= 0) this.cooldown -= (deltaTime);
-
-        if(this.velX > 0) this.velX -= 0.0005 * deltaTime;
+        if(this.velX > 0) this.velX -= this.slowDownX * deltaTime;
         else if(this.velX < 0) this.velX = 0;
+        
+        // Lower Cooldow
+        if(this.cooldown >= 0) this.cooldown -= (deltaTime);
+        
     }
 
     checkCollision(object) {
-        if(object.position.x < this.position.x + this.width && this.position.x < object.position.x + object.width)
-            if(object.position.y < this.position.y + this.height && this.position.y < object.position.y + object.height)    
+        if(object.x < this.x + this.width && this.x < object.x + object.width)
+            if(object.y < this.y + this.height && this.y < object.y + object.height)    
                 return true
     }
 }

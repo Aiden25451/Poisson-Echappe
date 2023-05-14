@@ -1,10 +1,36 @@
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+    html {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+    color:aliceblue;
+    background-color: rgb(0, 79, 110);
+}
+
 #gameScreen {
     z-index: -1;
     position: absolute;
+    background-color: rgb(0, 183, 255);
 }
 
 #main {
     display:none;
+
+}
+
+#menu {
+    padding-top: 20px;
+    background-color: rgb(0, 183, 255);
 }
 
 #name {
@@ -31,12 +57,7 @@
     content: attr(data-text)
 }
 
-body{
-    margin-top: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    color:aliceblue;
-    background-color: rgb(0, 183, 255);
-}
+
  
 .title{
     justify-content: center;
@@ -61,7 +82,7 @@ body{
     color:aliceblue;
     border: 5px solid rgb(0, 12, 34);
 
-    font-size: 3.5rem;
+    font-size: 3rem;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
@@ -75,26 +96,30 @@ body{
     border: 5px solid rgb(149, 239, 255);
 }
 
-#controls {
-    display: flex;
-    margin-left: 50px;
-    margin-right: 50px;
+#updown_btn {
+    position: absolute;
+    bottom: 0; 
+    left: 50px;
+}
 
-    position:absolute;
+#right_btn {
+    position: absolute;
+    bottom: 0; 
+    right:50px;
 }
 
 #controls button {
-    width: 100px;
-    height: 100px;
+    width: 10vw;
+    height: 10vw;
 
-    background-color: rgb(0, 88, 170);
-    color:aliceblue;
-    border: 5px solid rgb(0, 12, 34);
+    background-color: rgb(0, 88, 170, 0.5);
+    color:rgb(240, 248, 255, 0.5);
+    border: 5px solid rgb(0, 12, 34, 0.5);
 
-    font-size: 3.5rem;
+    font-size: auto;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #up {
