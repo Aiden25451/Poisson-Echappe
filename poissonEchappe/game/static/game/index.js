@@ -41,11 +41,7 @@ let best_time = 0;
 
 //Set the time shown on screen
 var time = document.getElementById("time")
-if(time.innerHTML != "Best Time: DNF") {
-    best_time = time.innerHTML.substring(11);
-    best_time = parseInt(best_time) //Seperate the time from the text Best Time: 
-    time.innerHTML = "Best Time: " + parseInt(Math.round(best_time)/1000) + ":" + Math.round(best_time)%1000;
-}
+time.value = "DNF"
 
 //Gameloop
 function gameLoop(timestamp) {
@@ -103,6 +99,16 @@ function openMenu() {
     var menu = window.document.getElementById("menu");
     var time = window.document.getElementById("time");
 
+    GAME_WIDTH = window.innerWidth;
+    GAME_HEIGHT = GAME_WIDTH/3;
+
+    game = new Game(GAME_WIDTH, GAME_HEIGHT, state);
+    pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state);
+
+    ctx.canvas.width  = GAME_WIDTH;
+    ctx.canvas.height = GAME_HEIGHT;
+    canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
+
     // Get rid of the screen and show the menu
     screen.style.display = "none";
     menu.style.display = "block";
@@ -110,13 +116,13 @@ function openMenu() {
     state.state = "pause";  
     
     // Set the right time
-    time.innerHTML = ("Best Time: " + parseInt(Math.round(best_time)/1000) + ":" + Math.round(best_time)%1000);
+    time.value = (parseInt(Math.round(best_time)/1000) + ":" + Math.round(best_time)%1000);
 }
 
 // Start game
 function startGame() { 
     // Check to make sure the name is there
-    if(window.document.getElementById("name").innerHTML == "" && state.state != "death") {
+    if(window.document.getElementById("name").value == "" && state.state != "death") {
         alert("PLEASE ENTER A NAME");
         return;
     }
@@ -148,6 +154,7 @@ function startGame() {
 }
 
 // Save time function
+/*
 function saveTime() {
     // Create a cookie
     const getCookie = async(name) => {
@@ -205,6 +212,7 @@ function saveTime() {
         alert("NO TIME SET");
     }    
 }
+*/
 
 // Function to go to home menu
 function  home(){

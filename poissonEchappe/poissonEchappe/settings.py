@@ -15,17 +15,24 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
+import environ
+
+
+env = environ.Env()
+
+environ.Env.read_env()
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-484)&)ofm-i*7z!d8nah)gdt#+d+%u2zc&80zoqx7m_8nk2kz='
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,12 +89,25 @@ WSGI_APPLICATION = 'poissonEchappe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# OLD DATABASE
+# -------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# NEW DATABASE
+import dj_database_url
+
+# SET UP A VIRTUAL ENVIRONMENT PROPERLY
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+
+    'default':dj_database_url.parse(env('DATABASE_URL'))
+
 }
+
 
 
 # Password validation
@@ -126,6 +146,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

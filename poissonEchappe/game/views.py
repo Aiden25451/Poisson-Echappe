@@ -10,29 +10,31 @@ def game(request):
         try:
             # repeat = False
 
-            time = request.POST["best_time"]
+            time = request.POST["time"]
             name = request.POST["name"]
+
+            times = time.split(":")
+
+            totalTime = 0
+            length = len(times)
             
-            time = round(float(time))
+            if(length == 2):
+                totalTime += int(times[1])
+                totalTime += int(times[0]) * 1000
 
-            # for score in Score.objects.all():
-            #     if(name == score.name):
-            #         repeat = True
+            else:
+                return redirect('../../home')
 
-            # if(repeat):
-            #     context["name"] = name
-            #     context["time"] = time
-            # else:
+
             score = Score()
             score.name = name
-            score.time = time
+            score.time = totalTime
             score.save()
             return redirect('../../home')
             
         except Exception as e:
             print(f"The error is {e}")
 
-    
     return render(request, 'game/game.html', context)
 
 def _return(request):

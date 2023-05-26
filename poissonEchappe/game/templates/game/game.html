@@ -38,24 +38,37 @@
             <h1>Poisson Échappe</h1> 
         </div>
 
-        <div class="row title">
+        <!-- <div class="row title">
             <h2 id="time">Best Time: {{time}}</h2>
         </div>
 
         <div class="row title">
             <div id="name" contentEditable="true" data-text="Enter Name here">{{ name }}</div>
+        </div> -->
+
+        <div class="row form">
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="time">Best Time:</label><br>
+                    <input type="text" id="time" name="time" value="" class="row"><br>
+                </div>
+                <div>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" value="">
+                </div>
+                <div>
+                    <input class="btn" type="submit" value="Save">
+                </div>
+            </form>
         </div>
 
         <div class="row buttons">
-            <button onclick="startGame()">Play</button>
+            <button class="btn" onclick="startGame()">Play</button>
         </div>
 
         <div class="row buttons">
-            <button onclick="saveTime()">Save</button>
-        </div>
-
-        <div class="row buttons">
-            <button onclick="home()">Return</button>
+            <button class="btn" onclick="home()">Return</button>
         </div>
 
         

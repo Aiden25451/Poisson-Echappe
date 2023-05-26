@@ -24,8 +24,12 @@ class Pause {
   
     // Question code
     render(ctx) {
-        ctx.font = '40pt Kremlin Pro Web';
+        if(this.GAME_WIDTH < 800)
+            ctx.font = '20pt Kremlin Pro Web';
+        else 
+            ctx.font = '40pt Kremlin Pro Web';
+
         ctx.fillStyle = '#000000';
-        ctx.fillText('PRESS SPACE TO START', 0, 200); 
+        ctx.fillText('PRESS SPACE OR FORWARD TO START', 25, this.GAME_HEIGHT/2); 
     }
 }
