@@ -4,6 +4,10 @@ body{
     background-color: rgb(0, 79, 110);
 }
 
+.container{
+    justify-content: center;
+}
+
 #gameScreen {
     z-index: -1;
     position: absolute;
@@ -20,18 +24,18 @@ body{
     background-color: rgb(0, 183, 255);
 }
 
-#name {
+.values {
     background-color: rgb(0, 88, 170);
     color:aliceblue;
     border: 5px solid rgb(0, 12, 34);
 
-    font-size: 3.5rem;
+    font-size: 1rem;
     text-align: center;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
 
-    min-width:25rem;
+    min-width:10rem;
 }
 
 #name:hover {
@@ -65,7 +69,7 @@ body{
 }
 
 .title h1{
-    font-size: 5rem;
+    font-size: 10vw;
 }
 
 .title h2{
@@ -82,12 +86,12 @@ body{
     color:aliceblue;
     border: 5px solid rgb(0, 12, 34);
 
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
 
-    width:25rem;
+    width:15rem;
 }
 
 .buttons button:hover {
