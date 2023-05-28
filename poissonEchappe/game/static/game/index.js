@@ -1,14 +1,14 @@
 //Width and Height
 GAME_WIDTH = window.innerWidth;
-GAME_HEIGHT = GAME_WIDTH/3;
+GAME_HEIGHT = GAME_WIDTH/2.5;
 
 // Canvas stuff
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
 
 ctx.canvas.width  = GAME_WIDTH;
-ctx.canvas.height = GAME_HEIGHT;
-canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
+ctx.canvas.height = window.innerHeight/1.05;
+// canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
 
 window.buttons = [false, false, false];
 
@@ -50,7 +50,7 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     
     // Clear Screen
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    ctx.clearRect(0, 0, ctx.canvas.innerWidth, ctx.canvas.innerHeight);
 
     //Start game
     if(state.state == "game") {
@@ -100,14 +100,14 @@ function openMenu() {
     var time = window.document.getElementById("time");
 
     GAME_WIDTH = window.innerWidth;
-    GAME_HEIGHT = GAME_WIDTH/3;
+    GAME_HEIGHT = GAME_WIDTH/2.5;
 
     game = new Game(GAME_WIDTH, GAME_HEIGHT, state);
     pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state);
 
     ctx.canvas.width  = GAME_WIDTH;
-    ctx.canvas.height = GAME_HEIGHT;
-    canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
+    ctx.canvas.height = window.innerHeight/1.05;
+    // canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
 
     // Get rid of the screen and show the menu
     screen.style.display = "none";
@@ -134,8 +134,8 @@ function startGame() {
     pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state);
 
     ctx.canvas.width  = GAME_WIDTH;
-    ctx.canvas.height = GAME_HEIGHT;
-    canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
+    ctx.canvas.height = window.innerHeight/1.05;
+    // canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2.5) + "px"
 
     var screen = window.document.getElementById("main");
     var menu = window.document.getElementById("menu");

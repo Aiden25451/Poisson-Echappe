@@ -16,19 +16,25 @@ class Player {
         this.gameWidth = gameWidth;
         this.camera = camera;
 
-        this.color = "#0ff"
+        this.color = "#FF8B00"
 
         this.cooldown = 0;
         this.cooldown_reset = 500;
 
         this.x = x;
         this.y = y;
+
+        this.img;
+        this.player1 = document.getElementById("player1")
+        this.player2 = document.getElementById("player2")
+        this.player3 = document.getElementById("player3")
+        this.img = player1;
+        this.startjump = 0;
     }
 
     // Draw
     draw(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     // Jump
@@ -36,11 +42,19 @@ class Player {
         if(this.cooldown <= 0) {
             this.velX += this.jumpX;
             this.cooldown = this.cooldown_reset
+            this.startjump = 0;
         } 
     }
 
     update(deltaTime, objects) {
         if(!deltaTime) return;
+
+        if(this.startjump < 150) this.img = this.player2;
+        else if(this.startjump < 300) this.img = this.player3;
+        else if(this.startjump < 450) this.img = this.player2;
+        else if(this.startjump < 600) this.img = this.player1;
+
+        this.startjump += deltaTime;
 
         // Check for Collision
         for(let i = 0; i < objects.length; i++) {
@@ -61,10 +75,10 @@ class Player {
 
         // Change y and clamp edge of screen
         this.y += this.velY * deltaTime;
-        if(this.y < 0)
-            this.y = 0;
-        else if(this.y + this.height > GAME_HEIGHT)
-            this.y = GAME_HEIGHT - this.height;
+        if(this.y - (window.innerHeight - GAME_HEIGHT) / 2.5 < 0)
+            this.y = (window.innerHeight - GAME_HEIGHT) / 2.5;
+        else if(this.y + this.height - (window.innerHeight - GAME_HEIGHT) / 2.5 > GAME_HEIGHT)
+            this.y = GAME_HEIGHT - this.height + (window.innerHeight - GAME_HEIGHT) / 2.5;
 
         // Change x, slow down continously
         this.camera.camx += (this.velX * deltaTime);

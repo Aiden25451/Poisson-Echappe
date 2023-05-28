@@ -20,7 +20,9 @@
 </head>
 <body>
     <div id="main">
+        <!-- <img id="border_top" src="{% static 'game\imgs\border.png' %}"> -->
         <canvas id="gameScreen" width="1400" height="600"></canvas>
+        <!-- <img id="border_bottom" src="{% static 'game\imgs\border.png' %}"> -->
         <div id="controls">
             <div id="updown_btn">
                 <button id="up">Ʌ</button>
@@ -35,6 +37,15 @@
 
     <div id="menu" class="container">
         
+        <div style="display:none">
+            <img id="background" src="{% static 'game\imgs\background.png' %}">
+            <img id="wall" src="{% static 'game\imgs\wall.png' %}">
+            <img id="edge" src="{% static 'game\imgs\edge.png' %}">
+            <img id="flag" src="{% static 'game\imgs\flag.png' %}">
+            <img id="player1" src="{% static 'game\imgs\player1.png' %}">
+            <img id="player2" src="{% static 'game\imgs\player2.png' %}">
+            <img id="player3" src="{% static 'game\imgs\player3.png' %}">
+        </div>
 
         <!-- <div class="row title">
             <h2 id="time">Best Time: {{time}}</h2>

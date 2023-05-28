@@ -31,7 +31,7 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -144,7 +144,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-if DEBUG:
+if not DEBUG:
     STATIC_URL = 'static/'
 else:
     STATIC_URL = 'static/'

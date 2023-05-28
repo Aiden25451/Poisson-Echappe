@@ -9,11 +9,12 @@ class Wall {
 
         this.x = this.original_x - this.camera.camx;
         this.y = y;
+
+        this.img = window.document.getElementById("wall");
     }
 
     draw(ctx) {
-        ctx.fillStyle = "#ff0"
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     update(deltaTime) {
