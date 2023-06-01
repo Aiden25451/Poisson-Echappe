@@ -17,11 +17,10 @@ def game(request):
 
             totalTime = 0
             length = len(times)
-            
+
             if(length == 2):
                 totalTime += int(times[1])
                 totalTime += int(times[0]) * 1000
-
             else:
                 return redirect('../../home')
 

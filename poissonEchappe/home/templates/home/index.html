@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'home/index.css' %}">
 
     <!-- Title Image -->
-    <link rel="shortcut icon" href="{% static 'home/Goldfish.jpg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'game/imgs/player3.png' %}" type="image/x-icon">
 
     <!-- JQeury -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -24,27 +24,31 @@
 <body>
     
     <div class="container">
-        <div class="row title">
-            <h1>Poisson Échappe</h1> 
+        <div class="row justify-content-center background">
+            <img id="title" src="{% static 'game\imgs\title.png' %}">
         </div>
 
         <div class="row buttons" style="margin-top:50px">
             <button onclick="goToGame()" id="play_button">PLAY GAME</button>
         </div>
 
-        <div class="row leaderboard_list">
-            <h1>Leaderboard</h1>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10 leaderboard_list">
+                <h1>Leaderboard</h1>
 
-            <table class="rounded-table">
-                {% for time in times %}
-                
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{time.name}}</td>
-                    <td class="time">{{time.time}}</td>
-                </tr>
-                {% endfor %}
-            </table>
+                <table class="rounded-table">
+                    {% for time in times %}
+                    
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{time.name}}</td>
+                        <td class="time">{{time.time}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-1"></div>
         </div>
 
         

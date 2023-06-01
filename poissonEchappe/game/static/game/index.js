@@ -1,16 +1,17 @@
 //Width and Height
 GAME_WIDTH = window.innerWidth;
-GAME_HEIGHT = GAME_WIDTH/2.5;
+GAME_HEIGHT = GAME_WIDTH/2.75;
 
 // Canvas stuff
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext('2d');
 
 ctx.canvas.width  = GAME_WIDTH;
-ctx.canvas.height = window.innerHeight/1.05;
+ctx.canvas.height = window.innerHeight;
 // canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
 
 window.buttons = [false, false, false];
+// document.getElementById("return_table").style.top = ((window.innerHeight - GAME_HEIGHT) / 2.75) + "px";
 
 //Set state
 let state = new State("menu")
@@ -50,7 +51,7 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
     
     // Clear Screen
-    ctx.clearRect(0, 0, ctx.canvas.innerWidth, ctx.canvas.innerHeight);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerWidth);
 
     //Start game
     if(state.state == "game") {
@@ -69,6 +70,7 @@ function gameLoop(timestamp) {
     else if(state.state == "death") { 
         //On death, reset set a new game and pause
         game.stop();
+        pause.stop()
         lastTime = 0;
 
         startGame()
@@ -79,6 +81,7 @@ function gameLoop(timestamp) {
     else if(state.state == "win") { 
         //Check if the best time has improved
         game.stop();
+        pause.stop()
         if(best_time == 0 || timestamp-start_time < best_time) {
             best_time = timestamp-start_time;
         }
@@ -99,14 +102,20 @@ function openMenu() {
     var menu = window.document.getElementById("menu");
     var time = window.document.getElementById("time");
 
+    window.document.getElementById("body").style.borderStyle = "solid"
+
+    window.document.getElementById("body").style.overflow = "scroll";
+
+    window.document.getElementById("return_table").style.display = "none";
+
     GAME_WIDTH = window.innerWidth;
-    GAME_HEIGHT = GAME_WIDTH/2.5;
+    GAME_HEIGHT = GAME_WIDTH/2.75;
 
     game = new Game(GAME_WIDTH, GAME_HEIGHT, state);
     pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state);
 
     ctx.canvas.width  = GAME_WIDTH;
-    ctx.canvas.height = window.innerHeight/1.05;
+    ctx.canvas.height = window.innerHeight;
     // canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2) + "px"
 
     // Get rid of the screen and show the menu
@@ -116,7 +125,11 @@ function openMenu() {
     state.state = "pause";  
     
     // Set the right time
-    time.value = (parseInt(Math.round(best_time)/1000) + ":" + Math.round(best_time)%1000);
+    if(best_time != 0)
+        time.value = (parseInt(Math.round(best_time)/1000) + ":" + Math.round(best_time)%1000);
+    else {
+        time.value = "DNF";
+    }
 }
 
 // Start game
@@ -127,14 +140,34 @@ function startGame() {
         return;
     }
 
+    if(window.innerWidth < window.innerHeight) {
+        alert("Please Flip your phone");
+        openMenu();
+        return;
+    }
+
+    var start_button = "Click spacebar to start"
+    if(window.mobileAndTabletCheck()) {
+        var start_button = "Press forward to start";
+    }
+
+    window.document.getElementById("body").style.borderStyle = "hidden";
+
+    window.document.getElementById("body").style.overflow = "hidden";
+
+    var ret_table = document.getElementById("return_table");
+    ret_table.style.display = "block";
+    
+    // ret_table.style.top = ((window.innerHeight - GAME_HEIGHT) / 2.75) + "px";
+    
     GAME_WIDTH = window.innerWidth;
-    GAME_HEIGHT = GAME_WIDTH/3;
+    GAME_HEIGHT = GAME_WIDTH/2.75;
 
     game = new Game(GAME_WIDTH, GAME_HEIGHT, state);
-    pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state);
+    pause = new Pause(GAME_WIDTH, GAME_HEIGHT, state, start_button);
 
     ctx.canvas.width  = GAME_WIDTH;
-    ctx.canvas.height = window.innerHeight/1.05;
+    ctx.canvas.height = window.innerHeight;
     // canvas.style.top = String((window.innerHeight - GAME_HEIGHT) / 2.5) + "px"
 
     var screen = window.document.getElementById("main");
@@ -150,6 +183,7 @@ function startGame() {
     pause.start()
    
     gameLoop(0)
+    
 
 }
 
@@ -213,8 +247,26 @@ function saveTime() {
     }    
 }
 */
+function DoSubmit(){
+    if(best_time == 0) {
+        alert("Set a Time First")
+        return false;
+    } else if(document.getElementById("name").value == "") {
+        alert("Enter a name")
+        return false;
+    } else if(document.getElementById("name").value.length >= 200) {
+        alert("Enter a shorter name")
+        return false;
+    } else if(best_time >= 2147483647) {
+        alert("Too slow")
+        return false;
+    } 
+    
+    return true
+}
 
 // Function to go to home menu
 function  home(){
     window.location.href += "return/";
 }
+

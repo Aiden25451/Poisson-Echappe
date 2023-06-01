@@ -11,31 +11,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <!-- Title Image -->
-    <link rel="shortcut icon" href="{% static 'home/Goldfish.jpg' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'game/imgs/player3.png' %}" type="image/x-icon">
 
     <!-- My CSS page -->
     <link rel="stylesheet" href="{% static 'game/game.css' %}">
 
     <title>Game Time</title>
 </head>
-<body>
+<body id="body">
     <div id="main">
         <!-- <img id="border_top" src="{% static 'game\imgs\border.png' %}"> -->
         <canvas id="gameScreen" width="1400" height="600"></canvas>
         <!-- <img id="border_bottom" src="{% static 'game\imgs\border.png' %}"> -->
         <div id="controls">
             <div id="updown_btn">
-                <button id="up">Ʌ</button>
-                <button id="down">V</button>
+                <div id="up"></div>
+                <div id="down"></div>
             </div>
             <div id="right_btn">
-                <button id="right">></button>
+                <div id="right"></div>
             </div>
             
         </div>
     </div>
 
-    <div id="menu" class="container">
+    <div id="return_table">
+        <table>
+            <tr>
+                <td>Return</td>
+            </tr>
+            <tr>
+                <td><button id="return_ingame" class="bigbtn" onclick="openMenu()" type="button"></button></td>
+            </tr>
+        </table>
+    </div>
+    
+    
+
+    <div id="menu">
         
         <div style="display:none">
             <img id="background" src="{% static 'game\imgs\background.png' %}">
@@ -55,44 +68,40 @@
             <div id="name" contentEditable="true" data-text="Enter Name here">{{ name }}</div>
         </div> -->
 
-        <div class="container-fluid">
-            <div class="row title" style="display:flex;align-items: center;">
-                <h1>Poisson Échappe</h1> 
+        <div class="container"> 
+            <div class="row justify-content-center background">
+                <img id="title" src="{% static 'game\imgs\title.png' %}">
             </div>
         </div>
 
-        <div class="container-medium">
-            <div class="row">
-                <div class="col-4">
-    
-                </div>
-                <div class="col-4">
-                    
-                    <form method="post">
-                        {% csrf_token %}
-                        <div>
-                            <label for="time">Best Time:</label><br>
-                            <input type="text" id="time" name="time" value="" class="values" readonly><br>
-                        </div>
-                        <div>
-                            <label for="name">Name:</label><br>
-                            <input type="text" id="name" name="name" class="values" value="">
-                        </div>
-                        <div>
-                            <input class="btn" type="submit" value="Save">
-                        </div>
-                    </form>
-                    <div class="buttons">
-                        <button class="btn" onclick="startGame()">Play</button>
-                    </div>
-                    <div class="buttons">
-                        <button class="btn" onclick="home()">Return</button>
-                    </div>
-                </div>
-                
-                <div class="col-4">
-    
-                </div>
+        <div class="container">
+            <div class="row justify-content-center" style="display: flex; align-items: center; justify-content: center;">   
+                <form id="myForm" method="post" onsubmit="return DoSubmit();">
+                    {% csrf_token %}
+                    <table class="form">
+                        <tr>
+                            <td class="form_col">Best Time</td>
+                            <td class="form_col"><input type="text" id="time" name="time" value="" class="values" readonly><br></td>
+                        </tr>
+                        <tr>
+                            <td class="form_col">Name</td>
+                            <td class="form_col"><input type="text" id="name" name="name" class="values" value=""></td>
+                        </tr>
+                    </table>
+
+                    <table id="button_table">
+                        <tr>
+                            <td class="button_col">Save</td>
+                            <td class="button_col">Play</td>
+                            <td class="button_col">Return</td>
+                        </tr>
+                        <tr>
+                            <td class="button_col"><input id="save" class="btn" type="submit" name="submit" value="" /></td>
+                            <td class="button_col"><button id="play" class="btn" onclick="startGame()" type="button"></button> </td>
+                            <td class="button_col"><button id="return" class="btn" onclick="home()" type="button"></button></td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
         

@@ -51,6 +51,7 @@ class Menu {
             
             if (isInside(mousePos, play_rect)) {
                 state.state = "pause"; 
+                window.scrollTo(0, 0);
                 canvas.removeEventListener('mouseup', button, false);;
             } 
 
