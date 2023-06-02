@@ -31,7 +31,7 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -146,6 +146,13 @@ USE_TZ = True
 
 if DEBUG:
     STATIC_URL = 'static/'
+    STATIC_ROOT = BASE_DIR / "static"
+    STORAGES = {
+        # Static storage
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 else:
     STATIC_URL = 'static/'
     STATIC_ROOT = BASE_DIR / "static"
