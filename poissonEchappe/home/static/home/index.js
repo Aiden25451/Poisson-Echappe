@@ -19,11 +19,6 @@ $(document).ready(function() {
 });
 
 function goToGame() {
-    if(window.innerHeight > window.innerWidth){
-        alert("Please flip your screen")
-        return;
-    } else {
-        window.location.href = "game/"
-    }
+    window.location.href = "game/"
 }
 

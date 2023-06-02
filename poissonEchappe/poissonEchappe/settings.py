@@ -148,9 +148,13 @@ if DEBUG:
     STATIC_URL = 'static/'
 else:
     STATIC_URL = 'static/'
-    STATIC_ROOT=os.path.join(BASE_DIR, 'static')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+    STATIC_ROOT = BASE_DIR / "static"
+    STORAGES = {
+        # Static storage
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

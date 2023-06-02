@@ -81,8 +81,8 @@ class Game {
 
     render(ctx, time) {
         // Draw the background
-        ctx.drawImage(this.background_drawing, this.backgrounds[0] - this.camera.camx , this.border_space, this.GAME_WIDTH + 1, this.GAME_HEIGHT);
-        ctx.drawImage(this.background_drawing, this.backgrounds[1] - this.camera.camx , this.border_space, this.GAME_WIDTH + 1, this.GAME_HEIGHT);
+        ctx.drawImage(this.background_drawing, this.backgrounds[0] - this.camera.camx , this.border_space, this.GAME_WIDTH + 10, this.GAME_HEIGHT);
+        ctx.drawImage(this.background_drawing, this.backgrounds[1] - this.camera.camx , this.border_space, this.GAME_WIDTH + 10, this.GAME_HEIGHT);
         
         // Draw the top edge
         ctx.drawImage(this.edge_img, this.backgrounds[0] - this.camera.camx , this.border_space - this.GAME_WIDTH/20, this.GAME_WIDTH, this.GAME_WIDTH/20);
@@ -110,10 +110,10 @@ class Game {
 
         if(this.GAME_WIDTH < 1200) {
             ctx.font = '15pt Courier New';
-            ctx.fillText('Timer: ' + parseInt(Math.round(time)/1000) + ":" + Math.round(time)%1000, 10, this.border_space + 20);
+            ctx.fillText('Timer: ' + parseInt(Math.round(time)/1000) + ":" + Math.round(time)%1000, 10, (window.innerHeight - GAME_HEIGHT) / 2.75 + 20);
         } else {
             ctx.font = '30pt Courier New';
-            ctx.fillText('Timer: ' + parseInt(Math.round(time)/1000) + ":" + Math.round(time)%1000, 10, this.border_space + 40);
+            ctx.fillText('Timer: ' + parseInt(Math.round(time)/1000) + ":" + Math.round(time)%1000, 10, (window.innerHeight - GAME_HEIGHT) / 2.75 + 40);
         }
         
         

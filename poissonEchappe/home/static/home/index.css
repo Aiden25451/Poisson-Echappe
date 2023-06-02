@@ -9,7 +9,11 @@ body{
     height:100%;
     min-height: 100vh;
 
-    padding-top: 20px;
+    padding-top: 5vw;
+
+    background-image: url("screen.png");
+    background-size: cover;
+    background-position: left bottom;
 }
 
 .background {
@@ -19,6 +23,7 @@ body{
 #title {
     width:100%;
     height:auto;
+    margin: 5vw;
 }
 
 .leaderboard_list {
@@ -69,7 +74,7 @@ button:hover {
     margin-left: 10px;
 }
 
-@media (max-width: 1200px) 
+@media (max-width: 1000px) 
  {
     .leaderboard_list h1{
         font-size: 2rem;
@@ -83,4 +88,19 @@ button:hover {
         font-size: 2rem;
     }
  }
+
+ @media (max-width: 500px) 
+{
+    .leaderboard_list h1{
+        font-size: 1.5rem;
+    }
+    
+    .leaderboard_list table{
+        font-size: 0.75rem
+    }
+
+    button {
+        font-size: 1.25rem;
+    }
+}
 

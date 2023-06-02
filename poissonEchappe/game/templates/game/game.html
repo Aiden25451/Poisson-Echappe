@@ -23,7 +23,7 @@
         <!-- <img id="border_top" src="{% static 'game\imgs\border.png' %}"> -->
         <canvas id="gameScreen" width="1400" height="600"></canvas>
         <!-- <img id="border_bottom" src="{% static 'game\imgs\border.png' %}"> -->
-        <div id="controls">
+        <div id="controls" class="fixit">
             <div id="updown_btn">
                 <div id="up"></div>
                 <div id="down"></div>
@@ -69,7 +69,7 @@
         </div> -->
 
         <div class="container"> 
-            <div class="row justify-content-center background">
+            <div class="row justify-content-center">
                 <img id="title" src="{% static 'game\imgs\title.png' %}">
             </div>
         </div>
@@ -90,16 +90,19 @@
                     </table>
 
                     <table id="button_table">
-                        <tr>
-                            <td class="button_col">Save</td>
-                            <td class="button_col">Play</td>
-                            <td class="button_col">Return</td>
-                        </tr>
-                        <tr>
-                            <td class="button_col"><input id="save" class="btn" type="submit" name="submit" value="" /></td>
-                            <td class="button_col"><button id="play" class="btn" onclick="startGame()" type="button"></button> </td>
-                            <td class="button_col"><button id="return" class="btn" onclick="home()" type="button"></button></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td class="button_col"></td>
+                                <td class="button_col"></td>
+                                <td class="button_col"></td>
+                            </tr>
+                            <tr>
+                                <td class="button_col">Save<br><input id="save" class="btn" type="submit" name="submit" value="" /></td>
+                                <td class="button_col">Play<br><button id="play" class="btn" onclick="startGame()" type="button"></button> </td>
+                                <td class="button_col">Return<br><button id="return" class="btn" onclick="home()" type="button"></button></td>
+                            </tr>
+                        </tbody>
+                        
                     </table>
                 </form>
             </div>
