@@ -266,7 +266,7 @@ function DoSubmit(){
 }
 
 // Function to go to home menu
-function  home(){
-    window.location.href += "return/";
+function  home(link){
+    window.location.href = link;
 }
 

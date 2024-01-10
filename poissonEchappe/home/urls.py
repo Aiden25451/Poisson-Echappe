@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
-     path('', views.index, name="index"),
-     path('game/', views.game, name="game" )
+    path("", views.index, name="index"),
+    path("game/", include("game.urls")),
 ]

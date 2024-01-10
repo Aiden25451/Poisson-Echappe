@@ -56,11 +56,10 @@ class Menu {
             } 
 
             if (isInside(mousePos, return_rect)) {
-                window.location.href += "return/"
+                window.location.href = "return/"
             } 
 
             if (isInside(mousePos, save_time)) {
-                console.log(1);
                 const getCookie = (name) => {
                     let cookieValue = null;
                     if(document.cookie && document.cookie !== '') {
