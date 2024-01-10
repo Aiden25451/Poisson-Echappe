@@ -19,7 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import environ
 
 env = environ.Env()
-
 environ.Env.read_env()
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
