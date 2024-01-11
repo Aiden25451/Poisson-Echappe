@@ -90,12 +90,12 @@ WSGI_APPLICATION = "poissonEchappe.wsgi.application"
 
 # OLD DATABASE
 # -------------
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # LOGGING = {
 #     "version": 1,
@@ -159,10 +159,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
-# if not DEBUG:
-#     STATIC_ROOT = BASE_DIR / "static"
-#     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
 # Default primary key field type

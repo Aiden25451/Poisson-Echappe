@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Score
 
-# from .models import Score
 
+class TopScoresListView(ListView):
+    model = Score
+    template_name = "home/index.html"
+    context_object_name = "times"
 
-# Create your views here.
-def index(request):
-    best_times = {}
-    # best_times = Score.objects.order_by("time")[:50]
-    context = {"times": best_times}
-    return render(request, "home/index.html", context)
+    def get_queryset(self):
+        # Get the 50 fastest times
+        return Score.objects.order_by("time")[:50]

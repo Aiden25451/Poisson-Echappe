@@ -76,35 +76,22 @@
         
         <div class="container">
             <div class="row justify-content-center" style="display: flex; align-items: center; justify-content: center;">   
-                <form id="myForm" method="post" onsubmit="return DoSubmit();">
+               
+                <form id="score" method="post">      
+                    
                     {% csrf_token %}
+                    {{ form.as_p }}
+                        
                     <table class="form">
                         <tr>
-                            <td class="form_col">Best Time</td>
-                            <td class="form_col"><input type="text" id="time" name="time" value="" class="values" readonly><br></td>
-                        </tr>
-                        <tr>
-                            <td class="form_col">Name</td>
-                            <td class="form_col"><input type="text" id="name" name="name" class="values" value=""></td>
+                            <td class="button_col">Save<br><button id="save" class="btn" onclick="doSubmit()" type="button"></button></td>
+                            <td class="button_col">Play<br><button id="play" class="btn" onclick="startGame()" type="button"></button> </td>
+                            <td class="button_col">Return<br><button id="return" class="btn" onclick="home(`{% url 'index' %}`)" type="button"></button></td>
                         </tr>
                     </table>
-
-                    <table id="button_table">
-                        <tbody>
-                            <tr>
-                                <td class="button_col"></td>
-                                <td class="button_col"></td>
-                                <td class="button_col"></td>
-                            </tr>
-                            <tr>
-                                <td class="button_col">Save<br><input id="save" class="btn" type="submit" name="submit" value="" /></td>
-                                <td class="button_col">Play<br><button id="play" class="btn" onclick="startGame()" type="button"></button> </td>
-                                <td class="button_col">Return<br><button id="return" class="btn" onclick="home(`{% url 'index' %}`)" type="button"></button></td>
-                            </tr>
-                        </tbody>
                         
-                    </table>
                 </form>
+            </table>
             </div>
         </div>
         
@@ -115,6 +102,8 @@
     </div>
 
     
+
+    
     <!-- Bootstrap Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -123,13 +112,19 @@
     <!-- My Javascript -->
     <script src="{% static 'game/input.js' %}"></script>
     <script src="{% static 'game/state.js' %}"></script>
-    <script src="{% static 'game/menu.js' %}"></script>
     <script src="{% static 'game/player.js' %}"></script>
     <script src="{% static 'game/game.js' %}"></script>
     <script src="{% static 'game/wall.js' %}"></script>
     <script src="{% static 'game/camera.js' %}"></script>
     <script src="{% static 'game/pause.js' %}"></script>
     <script src="{% static 'game/index.js' %}"></script>
+
+    <script>
+        var element = document.getElementById('id_time');
+        element.classList.add('values');
+        var element = document.getElementById('id_name');
+        element.classList.add('values');
+    </script>
     
 </body>
 </html>

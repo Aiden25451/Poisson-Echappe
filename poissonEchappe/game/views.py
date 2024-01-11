@@ -1,38 +1,22 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from home.models import Score
+from .forms import ScoreForm
 
-# from home.models import Score
 
+class GameView(FormView):
+    template_name = "game/game.html"
+    form_class = ScoreForm
+    success_url = reverse_lazy("index")
 
-# Create your views here.
-def game(request):
-    context = {"name": "", "time": "DNF"}
+    def form_valid(self, form):
+        if form.is_valid():
+            submission_name = form.cleaned_data["name"]
+            submission_time = form.cleaned_data["time"]
+            score = Score(
+                name=submission_name,
+                time=submission_time,
+            )
+            score.save()
 
-    # if request.method == "POST":
-    # try:
-    # repeat = False
-
-    # time = request.POST["time"]
-    # name = request.POST["name"]
-
-    # times = time.split(":")
-
-    # totalTime = 0
-    # length = len(times)
-
-    # if length == 2:
-    #     totalTime += int(times[1])
-    #     totalTime += int(times[0]) * 1000
-    # else:
-    #     return redirect("../../home")
-
-    # score = Score()
-    # score.name = name
-    # score.time = totalTime
-    # score.save()
-    # return reverse("index")
-
-    # except Exception as e:
-    # print(f"The error is {e}")
-
-    return render(request, "game/game.html", context)
+        return super().form_valid(form)

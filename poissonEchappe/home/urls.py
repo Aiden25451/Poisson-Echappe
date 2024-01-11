@@ -1,7 +1,7 @@
 from django.urls import path, include
-from . import views
+from .views import TopScoresListView
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", TopScoresListView.as_view(), name="index"),
     path("game/", include("game.urls")),
 ]
